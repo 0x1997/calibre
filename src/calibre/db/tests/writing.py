@@ -405,7 +405,7 @@ class WritingTest(BaseTest):
         ae(old_path, '%s/%s (1)' % (old_author, old_title))
         mi.title, mi.authors = 'New Title', ['New Author']
         cache.set_metadata(1, mi)
-        ae(cache.field_for('path', 1), '%s/%s (1)' % (mi.authors[0], mi.title))
+        ae(cache.field_for('path', 1), '%s_%s_(1)' % (mi.title, mi.authors[0]))
         p = cache.format_abspath(1, 'FMT1')
         self.assertTrue(mi.authors[0] in p and mi.title in p)
 
@@ -540,7 +540,7 @@ class WritingTest(BaseTest):
         for c in (cache, self.init_cache(cl)):
             self.assertEqual(c.all_field_names('authors'), {'New Author', 'Author Two'})
             self.assertEqual(c.field_for('author_sort', 3), 'Author, New')
-            self.assertIn('New Author/', c.field_for('path', 3))
+            self.assertIn('New Author', c.field_for('path', 3))
             self.assertEqual(c.field_for('authors', 1), ('Author Two',))
             self.assertEqual(c.field_for('author_sort', 1), 'Two, Author')
 

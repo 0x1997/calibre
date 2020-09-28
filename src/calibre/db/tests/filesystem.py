@@ -56,10 +56,10 @@ class FilesystemTest(BaseTest):
             data = self.get_filesystem_data(c, 1)
             ae(set(orig_data), set(data))
             ae(orig_data, data, 'Filesystem data does not match')
-            ae(c.field_for('path', 1), 'Moved/Moved (1)')
-            ae(c.field_for('path', 3), 'Moved1/Moved1 (3)')
+            ae(c.field_for('path', 1), 'Moved_Moved_(1)')
+            ae(c.field_for('path', 3), 'Moved1_Moved1_(3)')
         fpath = c.format_abspath(1, 'FMT1').replace(os.sep, '/').split('/')
-        ae(fpath[-3:], ['Moved', 'Moved (1)', 'Moved - Moved.fmt1'])
+        ae(fpath[-2:], ['Moved_Moved_(1)', 'Moved - Moved.fmt1'])
         af(os.path.exists(os.path.dirname(orig_fpath)), 'Original book folder still exists')
         # Check that the filesystem reflects fpath (especially on
         # case-insensitive systems).

@@ -1232,7 +1232,7 @@ class DB(object):
         '''
         Construct the directory name for this book based on its metadata.
         '''
-        book_id = ' (%d)' % book_id
+        book_id = '_(%d)' % book_id
         l = self.PATH_LIMIT - (len(book_id) // 2) - 2
         author = ascii_filename(author)[:l]
         title  = ascii_filename(title.lstrip())[:l].rstrip()
@@ -1245,9 +1245,7 @@ class DB(object):
             author = ''
         if not author:
             author = ascii_filename(_('Unknown'))
-        if author.upper() in WINDOWS_RESERVED_NAMES:
-            author += 'w'
-        return '%s/%s%s' % (author, title, book_id)
+        return '%s_%s%s' % (title, author, book_id)
 
     def construct_file_name(self, book_id, title, author, extlen):
         '''

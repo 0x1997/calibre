@@ -20,16 +20,7 @@ from polyglot.builtins import iteritems, itervalues, unicode_type, range
 
 
 def ascii_text(orig):
-    udc = get_udc()
-    try:
-        ascii = udc.decode(orig)
-    except Exception:
-        if isinstance(orig, unicode_type):
-            orig = orig.encode('ascii', 'replace')
-        ascii = orig.decode(preferred_encoding, 'replace')
-    if isinstance(ascii, bytes):
-        ascii = ascii.decode('ascii', 'replace')
-    return ascii
+    return orig
 
 
 def ascii_filename(orig, substitute='_'):
